@@ -1,0 +1,18 @@
+<h1>The Temp</h1>
+
+<div class="row">
+  <div class="col-xs-6 temp"> <span data-bind="text: temperature"></span>&deg; </div>
+  <div class="col-xs-6">
+    <div class="col-xs-3">
+      <i class="wi wi-snowflake-cold" data-bind="css: acStatus">    </i>
+      AC on at: <span data-bind="text: high"></span>
+    </div>
+    <div class="col-xs-3">
+      <i class="wi wi-hot"            data-bind="css: heaterStatus"></i>
+      Heat on at: <span data-bind="text: low"></span>
+    </div>
+  </div>
+</div>
+
+Run <code>thermo.updateStatus();</code> in the console
+

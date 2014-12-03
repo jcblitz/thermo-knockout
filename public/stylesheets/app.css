@@ -1,0 +1,19 @@
+.wi {
+  font-size: 100pt;
+}
+
+.wi.off {
+  color: gray;
+}
+
+.wi-hot.on {
+  color: red;
+}
+
+.wi-snowflake-cold.on {
+  color: blue;
+}
+
+.temp {
+  font-size: 20em;
+}
