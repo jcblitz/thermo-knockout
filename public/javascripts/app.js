@@ -1,36 +1,28 @@
 function Thermostat() {
     var me = this;
 
-    me.temperature = ko.observable(0);
+    me.temperature = ko.observable("--");
     me.running = ko.observable('none');
     me.high = ko.observable(0);
     me.low = ko.observable(0);
 
-    me.updateStatus = function() {
-        $.getJSON( "/api/status", function(data) {
-            me.temperature(data.temperature);
-            me.high(data.high);
-            me.low(data.low);
-
-            // removed running because the front end does it. Eventually the backend will do this
-        });
+    /*
+        Takes takes the result returned from the backend and updates the view model
+     */
+    me.updateStatus = function(data) {
+        me.temperature(data.temperature);
+        me.high(data.high);
+        me.low(data.low);
+        me.running(data.running);
     };
 
     /*
-    Move this to the API at some point
+        Take a sample from the thermostat unit
      */
-    me.regulateTemperature = function() {
-        var high = parseInt(me.high());
-        var low = parseInt(me.low());
-        var temp = parseInt(me.temperature());
-
-        if (temp > high) {
-            me.running('ac');
-        } else if (temp < low) {
-            me.running('heat');
-        } else {
-            me.running('none');
-        }
+    me.sample = function() {
+        $.getJSON( "/api/sample", function(data) {
+            me.updateStatus(data);
+        });
     };
 
     // compute the style for the heater
@@ -46,16 +38,11 @@ function Thermostat() {
     }, me);
 }
 
-//{temperature: 75, running: "heat", high: 80, low: 60}
-
 $(function() {
     thermo = new Thermostat();
 
-    thermo.temperature.subscribe(function(updated) {
-        thermo.regulateTemperature();
-    });
-
     ko.applyBindings(thermo);
 
-    thermo.updateStatus();
+    thermo.sample();
+    setInterval(function () { thermo.sample();  }, 3000);
 });
