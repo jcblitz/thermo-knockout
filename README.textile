@@ -1,0 +1,23 @@
+h1. ThermoHome
+
+h2. Introduction 
+
+I recently installed an "ecobee3":https://www.ecobee.com/ for the purpose of using the remote sensor as the canonical source of input in my house. However, it turns out that the features out of the box do not work how envisioned using it. Not to worry, there is an API I can use to do what I want. 
+
+h2. Technology
+
+A coworker started using "Knockout":http://knockoutjs.com/index.html for a recent project and was talking about how simple and intuitive it was, especially over the default suggestion of Angular. I wanted to give it a try to see what he was talking about, and he was right. I loaded up a basic stack and made a simple POC.
+
+* "Sinatra":http://www.sinatrarb.com/
+* "Knockout":http://knockoutjs.com/index.html
+* "Bootstrap":http://getbootstrap.com/
+
+h2. Running
+
+# Clone the repo
+# @bundle install@
+# @shotgun@
+# hit localhost:9393 in a browser
+
+It will query the backend for a temperature reading every 3 second. I have a random sample between 70 - 80 that will return so it keeps it exciting. 
+You'll notice the indicators for what system is running update automatically, as well as the temperature itself. 
